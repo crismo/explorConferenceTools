@@ -1,17 +1,17 @@
+import * as dotenv from 'dotenv'
+dotenv.config();
+
 import express from 'express'
-
 const server = express();
-const port = (process.env.PORT || 8080);
-
-
-server.set('port', port);
 server.use(express.static('public'));
-server.get("/", (req, res, next) => {
 
-    res.status(200).send('Hello World').end();
 
-});
+import badges from './routes/badges.mjs';
+server.use('/badges', badges);
 
-server.listen(server.get('port'), function () {
-    console.log('server running', server.get('port'));
+
+
+
+server.listen(process.env.PORT || 80, function () {
+    console.log('server running', process.env.PORT);
 });

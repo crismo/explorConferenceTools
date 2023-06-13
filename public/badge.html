@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xplore Badge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #myForm {
+            margin: 0 auto;
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
+        }
+
+        #myForm label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+
+        #myForm input[type="text"],
+        #myForm input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #myForm input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        #myForm input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #myForm input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #myForm input[type="text"],
+        #myForm input[type="email"],
+        #myForm input[type="submit"] {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="myForm">
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" value="{{firstName}}"><br>
+
+        <label for="lastName">Family Name:</label><br>
+        <input type="text" id="lastName" name="lastName" value="{{lastName}}"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{email}}"><br>
+
+
+        <label for="consent">
+            Sammtykke:
+        </label>
+        <p>
+            Din informasjon lagres kun i en uke, deles ikke med tredjeparter, og brukes utelukkende for å formidle du
+            har etterspurt
+            informasjon. Ved å sende inn din informasjon, samtykker du til denne bruken.
+        </p>
+
+        {{consent}}
+
+        <input type="submit" value="Lagre">
+        <hr />
+        <p>
+            Etter å ha registrert din deltakelse her, så kan du bruke QR koden hos de ulike arrangørene ved å registrere
+            din kode
+            hos dem. Dette gjøres ved å vise koden din til de ulike QR kode scannerene som står rundt forbi.
+        </p>
+
+    </form>
+
+
+    <script>
+
+        const badgeID = "{{badgeid}}";
+
+        document.getElementById('myForm').addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            let firstName = document.getElementById('firstName').value;
+            let lastName = document.getElementById('lastName').value;
+            let email = document.getElementById('email').value;
+            let consent = document.getElementById('consent').checked;
+
+            // Check consent checkbox
+            if (!consent) {
+                alert("Vi kan ikke fortsette uten sammtykke");
+                return;
+            }
+
+            // Data to be sent
+            var data = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            };
+
+            // POST request
+            fetch(`/badges/${badgeID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    location.reload();
+                }
+                )
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+
+    </script>
+
+
+</body>
+
+</html>
