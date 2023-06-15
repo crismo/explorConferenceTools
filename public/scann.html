@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="reader" width="600px"></div>
+
+    <script type="module">
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const targetId = urlParams.get('targetId')
+
+        const scanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 350, height: 350 } }, false);
+        scanner.render(onScanSuccess, onScanFailure);
+
+        let previousResult = null;
+
+        async function onScanSuccess(decodedText, decodedResult) {
+            // handle the scanned code as you like, for example:
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+
+            if (previousResult == decodedText) {
+                return;
+            }
+
+            previousResult = decodedText;
+            toggleBlue();
+
+
+            let id = decodedText.split("/").at(-1).trim();
+            if (id.indexOf("UiA:") == -1) {
+                alert("This is not a valid badge");
+                return;
+            }
+
+            let result = await fetch(`/badges/${id}/${targetId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
+
+            result = await result.json();
+            console.log(result);
+
+            toggleBlue();
+            if (result.error === undefined) {
+                flashGreen(1.5);
+            } else {
+                flashRed(1.5);
+            }
+
+            setTimeout(function () {
+                previousResult = null;
+            }, 2500);
+
+
+
+
+            /*
+            Code matched = https://escape.uia.no/badges/UiA:hgPHCNhU2A23 
+            Object { decodedText: "https://escape.uia.no/badges/UiA:hgPHCNhU2A23", result: {… } }
+            scann.html: 23: 21
+            */
+
+
+
+        }
+
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning.
+            // for example:
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        let coverDiv = null;
+
+        function toggleBlue() {
+            if (coverDiv) {
+                // Remove the cover div if it exists
+                document.body.removeChild(coverDiv);
+                coverDiv = null;
+            } else {
+                // Create a full-screen blue div
+                coverDiv = document.createElement("div");
+                coverDiv.style.position = "fixed";
+                coverDiv.style.top = "0";
+                coverDiv.style.left = "0";
+                coverDiv.style.width = "100%";
+                coverDiv.style.height = "100%";
+                coverDiv.style.backgroundColor = "blue";
+                coverDiv.style.zIndex = "9999";
+                coverDiv.style.display = "flex";
+                coverDiv.style.justifyContent = "center";
+                coverDiv.style.alignItems = "center";
+                coverDiv.style.color = "white"; // Set text color to white for visibility
+                coverDiv.textContent = "Lagrer"; // Add your text
+
+                // Add the blue div to the body
+                document.body.appendChild(coverDiv);
+            }
+        }
+
+
+        function flashGreen(n) {
+            // Create a full-screen green div
+            var greenDiv = document.createElement("div");
+            greenDiv.style.position = "fixed";
+            greenDiv.style.top = "0";
+            greenDiv.style.left = "0";
+            greenDiv.style.width = "100%";
+            greenDiv.style.height = "100%";
+            greenDiv.style.backgroundColor = "green";
+            greenDiv.style.zIndex = "9999";
+
+            // Add the green div to the body
+            document.body.appendChild(greenDiv);
+
+            // Remove the green div after 'n' seconds
+            setTimeout(function () {
+                document.body.removeChild(greenDiv);
+            }, n * 1000);
+        }
+
+        function flashRed(n) {
+            // Create a full-screen red div
+            var redDiv = document.createElement("div");
+            redDiv.style.position = "fixed";
+            redDiv.style.top = "0";
+            redDiv.style.left = "0";
+            redDiv.style.width = "100%";
+            redDiv.style.height = "100%";
+            redDiv.style.backgroundColor = "red";
+            redDiv.style.zIndex = "9999";
+
+            // Add the red div to the body
+            document.body.appendChild(redDiv);
+
+            // Remove the red div after 'n' seconds
+            setTimeout(function () {
+                document.body.removeChild(redDiv);
+            }, n * 1000);
+        }
+
+
+
+
+    </script>
+
+    <script src="js/html5-qrcode.min.js"></script>
+
+</body>
+
+</html>

@@ -117,6 +117,40 @@ badges.put('/:id', async (req, res, next) => {
 
 });
 
+badges.get('/:id/:vendorid', async (req, res, next) => {
+
+    console.log(req.params.id, req.params.vendorid);
+    try {
+        const db = new StorageManager(process.env.DB_CONNECTION);
+
+
+        let badge = await db.getBadge(req.params.id);
+        if (badge instanceof Error) {
+            throw new Error(badge);
+        }
+        badge = badge[0];
+
+        /*
+        if (badge.email === null || badge.email === "") {
+            res.status(400).json({ error: "Email is required" });
+            return;
+        }*/
+
+        const results = await db.updateBadgeRequests(req.params.id, req.params.vendorid);
+        if (results instanceof Error) {
+            throw new Error(results);
+        }
+
+        res.status(200).json(results);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    } finally {
+        res.end();
+    }
+
+});
+
 badges.delete('/:id', (req, res, next) => { });
 
 export default badges;

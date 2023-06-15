@@ -42,6 +42,25 @@ class StorageManager {
 
     }
 
+    async updateBadgeRequests(badgeId, vendorid) {
+
+        const client = new Client(this.#credentials);
+        let query = `UPDATE "public"."badges" SET "contact" = COALESCE("contact",'') ||  ${this.nullOrValue(vendorid)} WHERE "badgeId" = '${badgeId}' RETURNING *`;
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query(query);
+            results = results.rows;
+        } catch (err) {
+            results = err;
+        } finally {
+            client.end();
+        }
+
+        return results;
+
+    }
+
     nullOrValue(value) {
 
         if (value) {
