@@ -42,7 +42,7 @@ task.get('/:id', async (req, res, next) => {
 
     let taskID = req.params.id;
 
-    if (!taskID) {
+    if (taskID) {
         taskID = taskID.replace(":", "").trim();
     }
 
