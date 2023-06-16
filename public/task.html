@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape</title>
+    <link rel="stylesheet" href="../styleT.css">
+</head>
+
+<body>
+    <div id="container" class="container">
+        <div id="logo" aria-disabled="true">&nbsp;</div>
+        <h1>Oppgave: {{name}}</h1>
+        <input type="text" id="answer">
+        <button type="button" id="submitAnswer">submit</button>
+        <div id="feedback"></div>
+    </div>
+    <div id="info"></div>
+
+    <script>
+
+        const correct = "{{answer}}";
+        const onCorrect = "{{continue}}";
+
+
+        const feedback = document.getElementById("feedback");
+
+
+        document.getElementById("submitAnswer").addEventListener("click", function () {
+            const answer = document.getElementById("answer").value;
+            if (answer === correct) {
+                feedback.innerHTML = onCorrect;
+            } else {
+                feedback.innerHTML = "Beklager det er feil";
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -9,6 +9,9 @@ server.use(express.static('public'));
 import badges from './routes/badges.mjs';
 server.use('/badges', badges);
 
+import task from './routes/task.mjs';
+server.use('/task', task);
+
 
 
 

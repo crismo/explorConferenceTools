@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="222px" height="232px" viewBox="0 0 222 232" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Slice 1</title>
+    <defs>
+        <circle id="path-1" cx="117" cy="92" r="92"></circle>
+        <polygon id="path-3" points="0 0 114 0 114 118 0 118"></polygon>
+        <path d="M109,27 C78.072054,27 53,52.072054 53,83" id="path-5"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="EscapeLogo" transform="translate(13.000000, 0.000000)">
+            <line x1="52.5" y1="164.5" x2="3.71438991e-14" y2="219" id="Line" stroke="#000000" stroke-width="26" stroke-linecap="round"></line>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <circle stroke="#000000" stroke-width="13" cx="117" cy="92" r="85.5"></circle>
+            <g id="Group-10" mask="url(#mask-2)">
+                <g transform="translate(85.000000, 62.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-5" stroke="none" fill="none"></g>
+                    <path d="M53.5052318,26.4475882 L63.3905784,26.4475882 C61.3238345,15.2885798 64.016608,10.0243522 73.2860769,10.0243522 L114,10.0243522 L114,0 L73.035665,0 C56.9813883,0 49.8336524,8.89478794 53.5052318,26.4475882" id="Fill-4" stroke="none" fill="#000000" fill-rule="evenodd" mask="url(#mask-4)"></path>
+                    <polygon id="Fill-6" stroke="none" fill="#000000" fill-rule="evenodd" mask="url(#mask-4)" points="102.951423 118 114 118 114 44.9754968 102.951423 44.9754968"></polygon>
+                    <polygon id="Fill-7" stroke="none" fill="#000000" fill-rule="evenodd" mask="url(#mask-4)" points="78.1691082 118 89.133087 118 89.133087 44.9754968 78.1691082 44.9754968"></polygon>
+                    <polygon id="Fill-8" stroke="none" fill="#000000" fill-rule="evenodd" mask="url(#mask-4)" points="78.1598023 32.36698 114 32.36698 114 22.3434765 78.1598023 22.3434765"></polygon>
+                    <path d="M49.8040429,107.087951 C37.9272452,106.652589 29.9106817,101.155829 29.9106817,89.773624 C29.9106817,80.7651158 36.5838194,72.9252102 45.564807,72.9252102 C50.9841934,72.9252102 56.0558796,74.0827801 59.7071553,78.4754357 L59.7071553,67.4751264 C55.8080057,64.3079335 50.4224587,62.9483829 45.7796874,62.9483829 C31.8513736,62.9483829 20.5523843,73.2994685 20.5523843,88.8078508 C20.5523843,95.8033414 22.9651365,102.103781 26.5952625,106.129816 C15.853778,101.311134 9.6450866,91.6593428 9.6450866,78.5900045 C9.6450866,62.8117489 23.1233359,50.0912092 38.8527539,50.0912092 C41.5269157,50.0912092 44.0098847,50.3203469 46.7229618,51.0476471 L46.7229618,39.8818495 C44.6333764,39.4066008 41.5624471,39.1698252 39.3062024,39.1698252 C17.6328866,39.1698252 0,56.857562 0,78.5993398 C0,103.123019 18.0474197,118.021216 38.5304332,118.021216 L63.6426822,118.051768 L63.6426822,107.197428 C63.6426822,107.197428 56.1650118,107.140568 49.798121,107.095589 L49.8040429,107.087951" id="Fill-9" stroke="none" fill="#000000" fill-rule="evenodd" mask="url(#mask-4)"></path>
+                </g>
+            </g>
+            <mask id="mask-6" fill="white">
+                <use xlink:href="#path-5"></use>
+            </mask>
+            <use id="Mask" stroke="#000000" stroke-width="6" xlink:href="#path-5"></use>
+        </g>
+    </g>
+</svg>
