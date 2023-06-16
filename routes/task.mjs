@@ -40,7 +40,14 @@ task.get('/', async (req, res, next) => {
 
 task.get('/:id', async (req, res, next) => {
 
-    let task = tasks[req.params.id].replace(":", "").trim();
+    let taskID = req.params.id;
+
+    if (!taskID) {
+        taskID = taskID.replace(":", "").trim();
+    }
+
+    let task = tasks[taskID];
+
     // remove first name, last name and email from badge
     try {
         const output = fillTemplate(templateTask, task);
