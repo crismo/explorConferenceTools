@@ -22,20 +22,24 @@
     <script>
 
         const correct = "{{answer}}";
-        const onCorrect = "{{continue}}";
+        let onCorrect = "{{next}}";
+
+        if (onCorrect) {
+            onCorrect = `Bra jobba, skriv svaret på utsiden av konvolutten og gå videre til <a href="/task/${onCorrect}">en annen oppgave</a>`
+        }
 
 
         const feedback = document.getElementById("feedback");
 
 
         document.getElementById("submitAnswer").addEventListener("click", function () {
-            const answer = document.getElementById("answer").value;
-            if (answer === correct) {
-                feedback.innerHTML = onCorrect;
+            const answer = (document.getElementById("answer").value).toLowerCase();
+            if (correct.toLowerCase().indexOf(answer) != -1) {
+                feedback.innerHTML = onCorrect || "Bra jobba, skriv svaret på utsiden av konvolutten og gå videre til en annen oppgave";
             } else {
                 feedback.innerHTML = "Beklager det er feil";
             }
-        }
+        });
 
 
 

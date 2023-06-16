@@ -12,14 +12,14 @@ const __dirname = dirname(__filename);
 const task = express.Router();
 
 const tasks = {
-    "template": { "name": "", "answer": ["", ""], "continue": "", "description": "", "hints": ["", ""] },
+    "template": { "name": "", "answer": ["", ""], "next": "", "description": "", "hints": ["", ""] },
     "angram": {
-        "name": "Skjult tekst", "answer": ["nøkkel", "key"], "continue": "", "description": "Finn kunsten som skjuler tekst.", "hints": ["Kunsten har mange farver", "Kunsten er i nærheten av en av inngangene"],
+        "name": "Skjult tekst", "answer": ["nøkkel", "key"], "next": "", "description": "Finn kunsten som skjuler tekst.", "hints": ["Kunsten har mange farver", "Kunsten er i nærheten av en av inngangene"],
     },
-    "1980": { "name": "Utsikt fra innsiden", "answer": ["A3023", "A3 023"], "continue": "", "description": "Ting er ikke som de ser ut til", "hints": ["Hva er ikke der som skulle vært der", "Noen rom ser ut til å være borte"] },
-    "1990": { "name": "Utsikt mot UiA", "answer": ["uia"], "continue": "", "description": "Ting er ikke som de ser ut til", "hints": ["Hva er ikke der som skulle vært der", "Dekkorasjoner er ufullstendig"] },
-    "1985": { "name": "En kryptisk kasse", "answer": ["box"], "continue": "", "description": "Kodet i veggene finnes et svar", "hints": ["Alfabetet ligger på veggen", "Dere har en nøkkel"] },
-    "1995": { "name": "Tårnet", "answer": ["stair", "staircases", "trapp", "trapper"], "continue": "", "description": "I høyden finnes svar", "hints": ["Fra topp til bunn finnes en bit av pusslespillet", "Noe som snurrer har ting til felles med etasjer"] },
+    "1980": { "name": "Utsikt fra innsiden", "answer": ["a3023", "a3 023"], "next": "", "description": "Ting er ikke som de ser ut til", "hints": ["Hva er ikke der som skulle vært der", "Noen rom ser ut til å være borte"] },
+    "1990": { "name": "Utsikt mot UiA", "answer": ["uia"], "next": "", "description": "Ting er ikke som de ser ut til", "hints": ["Hva er ikke der som skulle vært der", "Dekkorasjoner er ufullstendig"] },
+    "1985": { "name": "En kryptisk kasse", "answer": ["box"], "next": "", "description": "Kodet i veggene finnes et svar", "hints": ["Alfabetet ligger på veggen", "Dere har en nøkkel"] },
+    "1995": { "name": "Tårnet", "answer": ["stair", "staircases", "trapp", "trapper"], "next": "angram", "description": "I høyden finnes svar", "hints": ["Fra topp til bunn finnes en bit av pusslespillet", "Noe som snurrer har ting til felles med etasjer"] },
 }
 
 
@@ -68,8 +68,8 @@ function fillTemplate(template, keyValues) {
     let file = (' ' + template).slice(1);
 
     Object.keys(keyValues).forEach(key => {
-        if (key && keyValues[key]) {
-            file = file.replace("{{" + key + "}}", keyValues[key]);
+        if (key) {
+            file = file.replace("{{" + key + "}}", keyValues[key] || "");
         }
     });
 

@@ -14,7 +14,7 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,8 @@ body {
     box-shadow: 0 0 15px #00FF00;
 }
 
-.card h3, .card p {
+.card h3,
+.card p {
     color: #00CC00;
 }
 
@@ -71,21 +72,21 @@ body {
 #logo {
     background-image: url(images/logo.svg);
     filter: invert();
-    width:222px;
-    height:232px;
+    width: 222px;
+    height: 232px;
 
 }
 
 #logSmal {
     background-image: url(images/logo.svg);
     filter: invert();
-    width:111px;
-    height:116px;
+    width: 111px;
+    height: 116px;
     background-size: 111px 116px;
 
 }
 
-#info{
+#info {
     position: fixed;
     bottom: 0;
     left: 0;
